@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Header from "@/components/organisms/Header";
 import ProjectCanvas from "@/components/organisms/ProjectCanvas";
-import ApperIcon from "@/components/atoms/ApperIcon";
+import ApperIcon from "@/components/ApperIcon";
 import { toast } from "react-toastify";
 const ProjectsHub = () => {
   const handleCreateProject = () => {

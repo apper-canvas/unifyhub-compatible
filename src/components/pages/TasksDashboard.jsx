@@ -4,7 +4,7 @@ import Header from "@/components/organisms/Header";
 import TasksList from "@/components/organisms/TasksList";
 import Button from "@/components/atoms/Button";
 import Badge from "@/components/atoms/Badge";
-import AppIcon from "@/components/atoms/AppIcon";
+import ApperIcon from "@/components/ApperIcon";
 const TasksDashboard = () => {
   const [view, setView] = useState('list')
   const [statusFilter, setStatusFilter] = useState('all')
@@ -127,14 +127,14 @@ const TasksDashboard = () => {
                       {stat.value}
                     </p>
                   </div>
-                  <div className={`
+<div className={`
                     p-3 rounded-lg
                     ${stat.color === 'primary' ? 'bg-primary-100' : ''}
                     ${stat.color === 'warning' ? 'bg-yellow-100' : ''}
                     ${stat.color === 'success' ? 'bg-green-100' : ''}
 ${stat.color === 'danger' ? 'bg-red-100' : ''}
                   `}>
-                    <AppIcon 
+                    <ApperIcon 
                       name={stat.icon} 
                       size={20} 
                       className={`
