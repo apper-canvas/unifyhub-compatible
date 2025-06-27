@@ -1,0 +1,72 @@
+[
+  {
+    "Id": 1,
+    "type": "gmail",
+    "name": "Gmail",
+    "status": "connected",
+    "lastSync": "2024-01-15T10:45:00Z"
+  },
+  {
+    "Id": 2,
+    "type": "outlook",
+    "name": "Outlook",
+    "status": "connected",
+    "lastSync": "2024-01-15T10:30:00Z"
+  },
+  {
+    "Id": 3,
+    "type": "slack",
+    "name": "Slack Workspace",
+    "status": "connected",
+    "lastSync": "2024-01-15T10:47:00Z"
+  },
+  {
+    "Id": 4,
+    "type": "teams",
+    "name": "Microsoft Teams",
+    "status": "syncing",
+    "lastSync": "2024-01-15T10:20:00Z"
+  },
+  {
+    "Id": 5,
+    "type": "discord",
+    "name": "Discord Server",
+    "status": "error",
+    "lastSync": "2024-01-15T08:15:00Z"
+  },
+  {
+    "Id": 6,
+    "type": "gcalendar",
+    "name": "Google Calendar",
+    "status": "connected",
+    "lastSync": "2024-01-15T10:40:00Z"
+  },
+  {
+    "Id": 7,
+    "type": "outlook_calendar",
+    "name": "Outlook Calendar",
+    "status": "connected",
+    "lastSync": "2024-01-15T10:35:00Z"
+  },
+  {
+    "Id": 8,
+    "type": "todoist",
+    "name": "Todoist",
+    "status": "connected",
+    "lastSync": "2024-01-15T10:42:00Z"
+  },
+  {
+    "Id": 9,
+    "type": "asana",
+    "name": "Asana Workspace",
+    "status": "offline",
+    "lastSync": null
+  },
+  {
+    "Id": 10,
+    "type": "trello",
+    "name": "Trello Boards",
+    "status": "connected",
+    "lastSync": "2024-01-15T10:25:00Z"
+  }
+]

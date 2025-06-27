@@ -1,0 +1,162 @@
+@import 'react-toastify/dist/ReactToastify.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #F8F9FA;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-primary-500 text-white px-4 py-2 rounded-md font-medium hover:bg-primary-600 active:bg-primary-700 transition-colors duration-150 shadow-sm hover:shadow-md;
+  }
+  
+  .btn-secondary {
+    @apply bg-white text-secondary-600 px-4 py-2 rounded-md font-medium border border-secondary-200 hover:bg-secondary-50 active:bg-secondary-100 transition-colors duration-150 shadow-sm hover:shadow-md;
+  }
+  
+  .card {
+    @apply bg-white rounded-lg shadow-card hover:shadow-card-hover transition-shadow duration-200;
+  }
+  
+  .input-field {
+    @apply w-full px-3 py-2 border border-secondary-200 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors duration-150;
+  }
+  
+  .sidebar-item {
+    @apply flex items-center px-3 py-2 text-secondary-600 hover:bg-secondary-50 rounded-md transition-colors duration-150 cursor-pointer;
+  }
+  
+  .sidebar-item.active {
+    @apply bg-primary-50 text-primary-600 border-l-4 border-primary-500 -ml-1 pl-4;
+  }
+}
+
+/* Toast customizations */
+.Toastify__toast-container {
+  width: auto;
+  max-width: 400px;
+}
+
+.Toastify__toast {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.875rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  padding: 12px 16px;
+}
+
+.Toastify__toast--success {
+  background: linear-gradient(135deg, #00C896 0%, #00D9B1 100%);
+}
+
+.Toastify__toast--error {
+  background: linear-gradient(135deg, #FF5A5F 0%, #FF6B70 100%);
+}
+
+.Toastify__toast--info {
+  background: linear-gradient(135deg, #4A90E2 0%, #5BA0F2 100%);
+}
+
+.Toastify__toast--warning {
+  background: linear-gradient(135deg, #FFB84D 0%, #FFC96B 100%);
+}
+
+.Toastify__progress-bar {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Connection lines */
+.connection-line {
+  position: absolute;
+  border-top: 2px dotted #cbd5e1;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Service badges */
+.service-badge {
+  @apply inline-flex items-center px-2 py-1 rounded-full text-xs font-medium;
+}
+
+.service-badge.email {
+  @apply bg-blue-100 text-blue-800;
+}
+
+.service-badge.message {
+  @apply bg-green-100 text-green-800;
+}
+
+.service-badge.task {
+  @apply bg-orange-100 text-orange-800;
+}
+
+.service-badge.event {
+  @apply bg-purple-100 text-purple-800;
+}
+
+/* Status indicators */
+.status-dot {
+  @apply inline-block w-2 h-2 rounded-full;
+}
+
+.status-dot.connected {
+  @apply bg-success;
+}
+
+.status-dot.syncing {
+  @apply bg-warning animate-pulse;
+}
+
+.status-dot.error {
+  @apply bg-error;
+}
+
+/* Hover cards */
+.hover-card {
+  @apply absolute z-50 p-3 bg-white rounded-lg shadow-elevation-2 border border-secondary-200 max-w-xs;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+}
+
+.hover-trigger:hover .hover-card {
+  opacity: 1;
+  visibility: visible;
+}

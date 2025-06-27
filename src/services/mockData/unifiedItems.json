@@ -1,0 +1,110 @@
+[
+  {
+    "Id": 1,
+    "type": "email",
+    "source": "Gmail",
+    "title": "Project Kickoff Meeting - Q4 Campaign",
+    "content": "Hi team, I'd like to schedule our kickoff meeting for the Q4 marketing campaign. Please review the attached brief and come prepared with your initial thoughts on the creative direction.",
+    "timestamp": "2024-01-15T10:30:00Z",
+    "projectId": 1
+  },
+  {
+    "Id": 2,
+    "type": "message",
+    "source": "Slack",
+    "title": "Design review needed",
+    "content": "Hey @channel, the new mockups are ready for review. Can we get feedback by EOD? Thanks!",
+    "timestamp": "2024-01-15T09:15:00Z",
+    "projectId": 1
+  },
+  {
+    "Id": 3,
+    "type": "task",
+    "source": "Todoist",
+    "title": "Finalize marketing budget allocation",
+    "content": "Review and approve the budget breakdown for Q4 marketing initiatives. Include social media ads, content creation, and events.",
+    "timestamp": "2024-01-15T08:00:00Z",
+    "projectId": 1
+  },
+  {
+    "Id": 4,
+    "type": "event",
+    "source": "Google Calendar",
+    "title": "Weekly Team Standup",
+    "content": "Regular team sync to discuss progress, blockers, and upcoming priorities.",
+    "timestamp": "2024-01-15T14:00:00Z",
+    "projectId": null
+  },
+  {
+    "Id": 5,
+    "type": "email",
+    "source": "Outlook",
+    "title": "Client feedback on proposal",
+    "content": "Thank you for the comprehensive proposal. We have a few questions about the timeline and would like to discuss pricing options.",
+    "timestamp": "2024-01-14T16:45:00Z",
+    "projectId": 2
+  },
+  {
+    "Id": 6,
+    "type": "message",
+    "source": "Teams",
+    "title": "Bug report - Dashboard loading issue",
+    "content": "Users are reporting slow loading times on the analytics dashboard. Need to investigate ASAP.",
+    "timestamp": "2024-01-14T13:20:00Z",
+    "projectId": null
+  },
+  {
+    "Id": 7,
+    "type": "task",
+    "source": "Asana",
+    "title": "Update user documentation",
+    "content": "Refresh the user guide with latest feature updates and troubleshooting steps.",
+    "timestamp": "2024-01-14T11:30:00Z",
+    "projectId": 3
+  },
+  {
+    "Id": 8,
+    "type": "event",
+    "source": "Google Calendar",
+    "title": "Client presentation rehearsal",
+    "content": "Final run-through of the presentation deck before tomorrow's client meeting.",
+    "timestamp": "2024-01-16T15:30:00Z",
+    "projectId": 2
+  },
+  {
+    "Id": 9,
+    "type": "email",
+    "source": "Gmail",
+    "title": "Invoice approval required",
+    "content": "Please review and approve the attached invoice from our development contractor. Total amount: $2,500.",
+    "timestamp": "2024-01-13T12:15:00Z",
+    "projectId": null
+  },
+  {
+    "Id": 10,
+    "type": "message",
+    "source": "Discord",
+    "title": "New feature demo",
+    "content": "Just pushed the new collaborative editing feature to staging. Check it out and let me know what you think!",
+    "timestamp": "2024-01-13T10:00:00Z",
+    "projectId": 3
+  },
+  {
+    "Id": 11,
+    "type": "task",
+    "source": "Trello",
+    "title": "Prepare monthly report",
+    "content": "Compile performance metrics, user feedback, and growth statistics for the monthly board presentation.",
+    "timestamp": "2024-01-12T09:00:00Z",
+    "projectId": null
+  },
+  {
+    "Id": 12,
+    "type": "event",
+    "source": "Outlook Calendar",
+    "title": "Product roadmap planning",
+    "content": "Strategic session to define product priorities for the next quarter and allocate development resources.",
+    "timestamp": "2024-01-17T10:00:00Z",
+    "projectId": 3
+  }
+]

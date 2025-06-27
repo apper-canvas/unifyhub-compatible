@@ -1,0 +1,26 @@
+[
+  {
+    "Id": 1,
+    "name": "Q4 Marketing Campaign",
+    "description": "Comprehensive marketing push for the holiday season including social media, email campaigns, and content creation.",
+    "linkedItems": ["email_1", "message_2", "task_3"],
+    "color": "#5E4FDB",
+    "created": "2024-01-10T08:00:00Z"
+  },
+  {
+    "Id": 2,
+    "name": "Client Onboarding System",
+    "description": "Streamline the client onboarding process with automated workflows and improved documentation.",
+    "linkedItems": ["email_5", "event_8"],
+    "color": "#00D9B1",
+    "created": "2024-01-08T10:30:00Z"
+  },
+  {
+    "Id": 3,
+    "name": "Product Feature Development",
+    "description": "Development of new collaborative editing features and user experience improvements.",
+    "linkedItems": ["task_7", "message_10", "event_12"],
+    "color": "#FFB84D",
+    "created": "2024-01-05T14:15:00Z"
+  }
+]

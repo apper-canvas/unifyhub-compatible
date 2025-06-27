@@ -1,0 +1,107 @@
+[
+  {
+    "Id": 1,
+    "name": "Email to Task Automation",
+    "conditions": [
+      {
+        "field": "content",
+        "operator": "contains",
+        "value": "urgent"
+      }
+    ],
+    "actions": [
+      {
+        "type": "create_task",
+        "target": "todoist",
+        "message": "Urgent task created from email"
+      }
+    ],
+    "enabled": true
+  },
+  {
+    "Id": 2,
+    "name": "Meeting Notification",
+    "conditions": [
+      {
+        "field": "type",
+        "operator": "equals",
+        "value": "event"
+      },
+      {
+        "field": "title",
+        "operator": "contains",
+        "value": "meeting"
+      }
+    ],
+    "actions": [
+      {
+        "type": "send_notification",
+        "target": "slack",
+        "message": "Meeting reminder sent to team"
+      }
+    ],
+    "enabled": true
+  },
+  {
+    "Id": 3,
+    "name": "Project Auto-linking",
+    "conditions": [
+      {
+        "field": "content",
+        "operator": "contains",
+        "value": "Q4 campaign"
+      }
+    ],
+    "actions": [
+      {
+        "type": "link_to_project",
+        "target": "1",
+        "message": "Item linked to Q4 Marketing Campaign"
+      }
+    ],
+    "enabled": false
+  },
+  {
+    "Id": 4,
+    "name": "Bug Report Escalation",
+    "conditions": [
+      {
+        "field": "title",
+        "operator": "contains",
+        "value": "bug"
+      }
+    ],
+    "actions": [
+      {
+        "type": "create_task",
+        "target": "asana",
+        "message": "Bug report escalated to development team"
+      },
+      {
+        "type": "send_notification",
+        "target": "teams",
+        "message": "Bug report notification sent"
+      }
+    ],
+    "enabled": true
+  },
+  {
+    "Id": 5,
+    "name": "Invoice Processing",
+    "conditions": [
+      {
+        "field": "title",
+        "operator": "contains",
+        "value": "invoice"
+      }
+    ],
+    "actions": [
+      {
+        "type": "create_task",
+        "target": "todoist",
+        "message": "Invoice review task created"
+      }
+    ],
+    "enabled": false
+  }
+]
