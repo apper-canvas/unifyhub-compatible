@@ -77,27 +77,49 @@ const RuleCard = ({ rule, onToggle, onEdit, onDelete, onTest }) => {
       <div className="space-y-3">
         <div>
           <h4 className="text-sm font-medium text-secondary-700 mb-2">
-            Conditions (IF):
+Conditions (IF):
           </h4>
           <div className="space-y-1">
-            {rule.conditions?.map((condition, index) => (
-              <div key={index} className="text-sm text-secondary-600 bg-secondary-50 px-3 py-2 rounded">
-                {formatCondition(condition)}
-              </div>
-            ))}
+            {(() => {
+              try {
+                const conditions = Array.isArray(rule.conditions) 
+                  ? rule.conditions 
+                  : typeof rule.conditions === 'string' 
+                    ? JSON.parse(rule.conditions) 
+                    : [];
+                return conditions.map((condition, index) => (
+                  <div key={index} className="text-sm text-secondary-600 bg-secondary-50 px-3 py-2 rounded">
+                    {formatCondition(condition)}
+                  </div>
+                ));
+              } catch (error) {
+                return [];
+              }
+            })()}
           </div>
         </div>
         
         <div>
           <h4 className="text-sm font-medium text-secondary-700 mb-2">
-            Actions (THEN):
+Actions (THEN):
           </h4>
           <div className="space-y-1">
-            {rule.actions?.map((action, index) => (
-              <div key={index} className="text-sm text-secondary-600 bg-primary-50 px-3 py-2 rounded">
-                {formatAction(action)}
-              </div>
-            ))}
+            {(() => {
+              try {
+                const actions = Array.isArray(rule.actions) 
+                  ? rule.actions 
+                  : typeof rule.actions === 'string' 
+                    ? JSON.parse(rule.actions) 
+                    : [];
+                return actions.map((action, index) => (
+                  <div key={index} className="text-sm text-secondary-600 bg-primary-50 px-3 py-2 rounded">
+                    {formatAction(action)}
+                  </div>
+                ));
+              } catch (error) {
+                return [];
+              }
+            })()}
           </div>
         </div>
       </div>
