@@ -81,7 +81,7 @@ const TasksList = ({ view = 'list', statusFilter = 'all', sourceFilter = 'all' }
           </motion.button>
           
           <div className="flex-1">
-            <div className="flex items-center space-x-2 mb-1">
+<div className="flex items-center space-x-2 mb-1">
               <h4 className="font-medium text-secondary-900">
                 {task.title}
               </h4>
@@ -101,7 +101,7 @@ const TasksList = ({ view = 'list', statusFilter = 'all', sourceFilter = 'all' }
                 {format(new Date(task.timestamp), 'MMM d, h:mm a')}
               </span>
               
-              {task.projectId && (
+{task.project_id && (
                 <Badge variant="primary" size="xs">
                   Linked
                 </Badge>

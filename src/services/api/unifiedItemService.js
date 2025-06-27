@@ -1,62 +1,166 @@
-import mockData from '@/services/mockData/unifiedItems.json'
-
 class UnifiedItemService {
   constructor() {
-    this.items = [...mockData]
+    this.apperClient = null
+    this.initializeClient()
+  }
+
+  initializeClient() {
+    const { ApperClient } = window.ApperSDK
+    this.apperClient = new ApperClient({
+      apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+      apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+    })
   }
 
   async getAll() {
-    // Simulate API delay
-    await this.delay(300)
-    return [...this.items]
+    try {
+      const params = {
+        fields: [
+          { field: { Name: "Name" } },
+          { field: { Name: "Tags" } },
+          { field: { Name: "Owner" } },
+          { field: { Name: "type" } },
+          { field: { Name: "source" } },
+          { field: { Name: "title" } },
+          { field: { Name: "content" } },
+          { field: { Name: "timestamp" } },
+          { field: { Name: "project_id" } }
+        ]
+      }
+      
+      const response = await this.apperClient.fetchRecords('unified_item', params)
+      
+      if (!response.success) {
+        console.error(response.message)
+        throw new Error(response.message)
+      }
+      
+      return response.data || []
+    } catch (error) {
+      console.error('Error fetching unified items:', error)
+      throw error
+    }
   }
 
   async getById(id) {
-    await this.delay(200)
-    const item = this.items.find(item => item.Id === id)
-    if (!item) {
-      throw new Error(`Unified item with id ${id} not found`)
+    try {
+      const params = {
+        fields: [
+          { field: { Name: "Name" } },
+          { field: { Name: "Tags" } },
+          { field: { Name: "Owner" } },
+          { field: { Name: "type" } },
+          { field: { Name: "source" } },
+          { field: { Name: "title" } },
+          { field: { Name: "content" } },
+          { field: { Name: "timestamp" } },
+          { field: { Name: "project_id" } }
+        ]
+      }
+      
+      const response = await this.apperClient.getRecordById('unified_item', id, params)
+      
+      if (!response.success) {
+        console.error(response.message)
+        throw new Error(response.message)
+      }
+      
+      return response.data
+    } catch (error) {
+      console.error(`Error fetching unified item with ID ${id}:`, error)
+      throw error
     }
-    return { ...item }
   }
 
   async create(newItem) {
-    await this.delay(400)
-    const maxId = Math.max(...this.items.map(item => item.Id), 0)
-    const item = {
-      ...newItem,
-      Id: maxId + 1,
-      timestamp: new Date().toISOString()
+    try {
+      // Filter to only include updateable fields
+      const params = {
+        records: [{
+          Name: newItem.Name || newItem.name,
+          Tags: newItem.Tags,
+          Owner: newItem.Owner,
+          type: newItem.type,
+          source: newItem.source,
+          title: newItem.title,
+          content: newItem.content,
+          timestamp: newItem.timestamp || new Date().toISOString(),
+          project_id: newItem.project_id || newItem.projectId
+        }]
+      }
+      
+      const response = await this.apperClient.createRecord('unified_item', params)
+      
+      if (!response.success) {
+        console.error(response.message)
+        throw new Error(response.message)
+      }
+      
+      if (response.results && response.results.length > 0 && response.results[0].success) {
+        return response.results[0].data
+      } else {
+        throw new Error('Failed to create unified item')
+      }
+    } catch (error) {
+      console.error('Error creating unified item:', error)
+      throw error
     }
-    this.items.push(item)
-    return { ...item }
   }
 
   async update(id, updates) {
-    await this.delay(300)
-    const index = this.items.findIndex(item => item.Id === id)
-    if (index === -1) {
-      throw new Error(`Unified item with id ${id} not found`)
+    try {
+      // Filter to only include updateable fields
+      const params = {
+        records: [{
+          Id: id,
+          ...(updates.Name !== undefined && { Name: updates.Name }),
+          ...(updates.Tags !== undefined && { Tags: updates.Tags }),
+          ...(updates.Owner !== undefined && { Owner: updates.Owner }),
+          ...(updates.type !== undefined && { type: updates.type }),
+          ...(updates.source !== undefined && { source: updates.source }),
+          ...(updates.title !== undefined && { title: updates.title }),
+          ...(updates.content !== undefined && { content: updates.content }),
+          ...(updates.timestamp !== undefined && { timestamp: updates.timestamp }),
+          ...(updates.project_id !== undefined && { project_id: updates.project_id })
+        }]
+      }
+      
+      const response = await this.apperClient.updateRecord('unified_item', params)
+      
+      if (!response.success) {
+        console.error(response.message)
+        throw new Error(response.message)
+      }
+      
+      if (response.results && response.results.length > 0 && response.results[0].success) {
+        return response.results[0].data
+      } else {
+        throw new Error('Failed to update unified item')
+      }
+    } catch (error) {
+      console.error('Error updating unified item:', error)
+      throw error
     }
-    
-    this.items[index] = { ...this.items[index], ...updates }
-    return { ...this.items[index] }
   }
 
   async delete(id) {
-    await this.delay(250)
-    const index = this.items.findIndex(item => item.Id === id)
-    if (index === -1) {
-      throw new Error(`Unified item with id ${id} not found`)
+    try {
+      const params = {
+        RecordIds: [id]
+      }
+      
+      const response = await this.apperClient.deleteRecord('unified_item', params)
+      
+      if (!response.success) {
+        console.error(response.message)
+        throw new Error(response.message)
+      }
+      
+      return true
+    } catch (error) {
+      console.error('Error deleting unified item:', error)
+      throw error
     }
-    
-    const deletedItem = { ...this.items[index] }
-    this.items.splice(index, 1)
-    return deletedItem
-  }
-
-  delay(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms))
   }
 }
 

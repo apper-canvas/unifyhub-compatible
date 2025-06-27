@@ -1,63 +1,160 @@
-import mockData from '@/services/mockData/projects.json'
-
 class ProjectService {
   constructor() {
-    this.projects = [...mockData]
+    this.apperClient = null
+    this.initializeClient()
+  }
+
+  initializeClient() {
+    const { ApperClient } = window.ApperSDK
+    this.apperClient = new ApperClient({
+      apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+      apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+    })
   }
 
   async getAll() {
-    // Simulate API delay
-    await this.delay(250)
-    return [...this.projects]
+    try {
+      const params = {
+        fields: [
+          { field: { Name: "Name" } },
+          { field: { Name: "Tags" } },
+          { field: { Name: "Owner" } },
+          { field: { Name: "description" } },
+          { field: { Name: "linked_items" } },
+          { field: { Name: "color" } },
+          { field: { Name: "created" } }
+        ]
+      }
+      
+      const response = await this.apperClient.fetchRecords('project', params)
+      
+      if (!response.success) {
+        console.error(response.message)
+        throw new Error(response.message)
+      }
+      
+      return response.data || []
+    } catch (error) {
+      console.error('Error fetching projects:', error)
+      throw error
+    }
   }
 
   async getById(id) {
-    await this.delay(200)
-    const project = this.projects.find(project => project.Id === id)
-    if (!project) {
-      throw new Error(`Project with id ${id} not found`)
+    try {
+      const params = {
+        fields: [
+          { field: { Name: "Name" } },
+          { field: { Name: "Tags" } },
+          { field: { Name: "Owner" } },
+          { field: { Name: "description" } },
+          { field: { Name: "linked_items" } },
+          { field: { Name: "color" } },
+          { field: { Name: "created" } }
+        ]
+      }
+      
+      const response = await this.apperClient.getRecordById('project', id, params)
+      
+      if (!response.success) {
+        console.error(response.message)
+        throw new Error(response.message)
+      }
+      
+      return response.data
+    } catch (error) {
+      console.error(`Error fetching project with ID ${id}:`, error)
+      throw error
     }
-    return { ...project }
   }
 
   async create(newProject) {
-    await this.delay(400)
-    const maxId = Math.max(...this.projects.map(project => project.Id), 0)
-    const project = {
-      ...newProject,
-      Id: maxId + 1,
-      created: new Date().toISOString(),
-      linkedItems: newProject.linkedItems || []
+    try {
+      // Filter to only include updateable fields
+      const params = {
+        records: [{
+          Name: newProject.Name || newProject.name,
+          Tags: newProject.Tags,
+          Owner: newProject.Owner,
+          description: newProject.description,
+          linked_items: typeof newProject.linked_items === 'string' ? newProject.linked_items : JSON.stringify(newProject.linked_items || newProject.linkedItems || []),
+          color: newProject.color,
+          created: newProject.created || new Date().toISOString()
+        }]
+      }
+      
+      const response = await this.apperClient.createRecord('project', params)
+      
+      if (!response.success) {
+        console.error(response.message)
+        throw new Error(response.message)
+      }
+      
+      if (response.results && response.results.length > 0 && response.results[0].success) {
+        return response.results[0].data
+      } else {
+        throw new Error('Failed to create project')
+      }
+    } catch (error) {
+      console.error('Error creating project:', error)
+      throw error
     }
-    this.projects.push(project)
-    return { ...project }
   }
 
   async update(id, updates) {
-    await this.delay(300)
-    const index = this.projects.findIndex(project => project.Id === id)
-    if (index === -1) {
-      throw new Error(`Project with id ${id} not found`)
+    try {
+      // Filter to only include updateable fields
+      const params = {
+        records: [{
+          Id: id,
+          ...(updates.Name !== undefined && { Name: updates.Name }),
+          ...(updates.Tags !== undefined && { Tags: updates.Tags }),
+          ...(updates.Owner !== undefined && { Owner: updates.Owner }),
+          ...(updates.description !== undefined && { description: updates.description }),
+          ...(updates.linked_items !== undefined && { 
+            linked_items: typeof updates.linked_items === 'string' ? updates.linked_items : JSON.stringify(updates.linked_items)
+          }),
+          ...(updates.color !== undefined && { color: updates.color }),
+          ...(updates.created !== undefined && { created: updates.created })
+        }]
+      }
+      
+      const response = await this.apperClient.updateRecord('project', params)
+      
+      if (!response.success) {
+        console.error(response.message)
+        throw new Error(response.message)
+      }
+      
+      if (response.results && response.results.length > 0 && response.results[0].success) {
+        return response.results[0].data
+      } else {
+        throw new Error('Failed to update project')
+      }
+    } catch (error) {
+      console.error('Error updating project:', error)
+      throw error
     }
-    
-    this.projects[index] = { ...this.projects[index], ...updates }
-    return { ...this.projects[index] }
   }
 
   async delete(id) {
-    await this.delay(250)
-    const index = this.projects.findIndex(project => project.Id === id)
-    if (index === -1) {
-      throw new Error(`Project with id ${id} not found`)
+    try {
+      const params = {
+        RecordIds: [id]
+      }
+      
+      const response = await this.apperClient.deleteRecord('project', params)
+      
+      if (!response.success) {
+        console.error(response.message)
+        throw new Error(response.message)
+      }
+      
+      return true
+    } catch (error) {
+      console.error('Error deleting project:', error)
+      throw error
     }
-    
-    const deletedProject = { ...this.projects[index] }
-    this.projects.splice(index, 1)
-    return deletedProject
-  }
-
-  delay(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms))
   }
 }
 

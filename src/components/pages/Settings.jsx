@@ -34,48 +34,42 @@ const Settings = () => {
     }
   }
 
-  const handleConnect = async (serviceId) => {
+const handleConnect = async (serviceId) => {
     try {
-      const service = services.find(s => s.Id === serviceId)
       const updatedService = await connectedServiceService.update(serviceId, {
-        ...service,
         status: 'connected',
-        lastSync: new Date().toISOString()
+        last_sync: new Date().toISOString()
       })
       
       setServices(prev => prev.map(s => 
         s.Id === serviceId ? updatedService : s
       ))
       
-      toast.success(`${updatedService.name} connected successfully`)
+      toast.success(`${updatedService.Name} connected successfully`)
     } catch (err) {
       toast.error('Failed to connect service')
     }
   }
 
-  const handleDisconnect = async (serviceId) => {
+const handleDisconnect = async (serviceId) => {
     try {
-      const service = services.find(s => s.Id === serviceId)
       const updatedService = await connectedServiceService.update(serviceId, {
-        ...service,
         status: 'offline',
-        lastSync: null
+        last_sync: null
       })
       
       setServices(prev => prev.map(s => 
         s.Id === serviceId ? updatedService : s
       ))
       
-      toast.success(`${updatedService.name} disconnected`)
+      toast.success(`${updatedService.Name} disconnected`)
     } catch (err) {
       toast.error('Failed to disconnect service')
     }
   }
 
-  const handleRefresh = async (serviceId) => {
+const handleRefresh = async (serviceId) => {
     try {
-      const service = services.find(s => s.Id === serviceId)
-      
       // Show syncing status
       setServices(prev => prev.map(s => 
         s.Id === serviceId ? { ...s, status: 'syncing' } : s
@@ -85,16 +79,15 @@ const Settings = () => {
       await new Promise(resolve => setTimeout(resolve, 2000))
       
       const updatedService = await connectedServiceService.update(serviceId, {
-        ...service,
         status: 'connected',
-        lastSync: new Date().toISOString()
+        last_sync: new Date().toISOString()
       })
       
       setServices(prev => prev.map(s => 
         s.Id === serviceId ? updatedService : s
       ))
       
-      toast.success(`${updatedService.name} synced successfully`)
+      toast.success(`${updatedService.Name} synced successfully`)
     } catch (err) {
       toast.error('Failed to sync service')
       

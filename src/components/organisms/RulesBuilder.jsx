@@ -27,11 +27,10 @@ const RulesBuilder = ({ onCreateRule }) => {
     }
   }
 
-  const handleToggleRule = async (ruleId) => {
+const handleToggleRule = async (ruleId) => {
     try {
       const rule = rules.find(r => r.Id === ruleId)
       const updatedRule = await ruleService.update(ruleId, {
-        ...rule,
         enabled: !rule.enabled
       })
       

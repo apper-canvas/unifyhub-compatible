@@ -1,9 +1,12 @@
 import { motion } from 'framer-motion'
+import { useContext } from 'react'
+import { AuthContext } from '@/App'
 import SearchBar from '@/components/molecules/SearchBar'
 import Button from '@/components/atoms/Button'
 import ApperIcon from '@/components/ApperIcon'
-
 const Header = ({ title, onSearch, showSearch = true }) => {
+  const { logout } = useContext(AuthContext)
+  
   return (
     <motion.header
       initial={{ opacity: 0, y: -10 }}
@@ -38,6 +41,13 @@ const Header = ({ title, onSearch, showSearch = true }) => {
               variant="ghost"
               size="sm"
               icon="Settings"
+            />
+            
+            <Button
+              variant="ghost"
+              size="sm"
+              icon="LogOut"
+              onClick={logout}
             />
           </div>
         </div>
